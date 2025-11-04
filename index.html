@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Birthday Simran 🎂</title>
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #ffe6f2, #fff);
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  text-align: center;
+}
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #ff4da6;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+button:hover { background-color: #ff66b3; }
+#message {
+  max-width: 90%;
+  margin: 40px auto;
+  font-size: 22px;
+  color: #333;
+  line-height: 1.6;
+  min-height: 120px;
+}
+#photo {
+  width: 220px;
+  height: auto;
+  border-radius: 20px;
+  margin: 40px auto 20px;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+#final {
+  display: none;
+  font-size: 20px;
+  margin-top: 20px;
+  color: #444;
+}
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<h1 id="title">🎉 Happy Birthday Simran 🎂</h1>
+<p id="message"></p>
+<img id="photo" src="simran.jpg" alt="Simran">
+<p id="final">— From your brother, Ashwin 💫</p>
+
+<button id="nextBtn">Start</button>
+<audio id="bgMusic" src="music.mp3"></audio>
+
+<script>
+// Blessing message (same as Ayush Sharma's poetic lines)
+const lines = [
+"Today is as beautiful as other days...",
+"But you realize another year has gone in a blink of the eyes...",
+"However, do you know?",
+"Today is just special,",
+"So special to you, that even the sun shines brighter,",
+"And the wind blows softer,",
+"And the birds sing sweeter,",
+"All to wish you a beautiful day.",
+"Happy Birthday Simran 🎂",
+"May your life be filled with smiles, success, and wonderful moments.",
+"— From your brother, Ashwin 💫"
+];
+
+let i = 0, j = 0;
+const msg = document.getElementById("message");
+const btn = document.getElementById("nextBtn");
+const photo = document.getElementById("photo");
+const final = document.getElementById("final");
+const music = document.getElementById("bgMusic");
+
+function typeLine() {
+  if (j < lines[i].length) {
+    msg.innerHTML += lines[i][j];
+    j++;
+    setTimeout(typeLine, 60);
+  } else {
+    j = 0;
+    i++;
+    if (i < lines.length) {
+      btn.style.display = "inline-block";
+      btn.textContent = "Next";
+    } else {
+      btn.style.display = "none";
+      photo.style.display = "block";
+      final.style.display = "block";
+    }
+  }
+}
+
+btn.addEventListener("click", () => {
+  btn.style.display = "none";
+  msg.innerHTML = "";
+  if (i === 0) {
+    // start confetti and music on first click
+    startConfetti();
+    music.play().catch(()=>{});
+  }
+  typeLine();
+});
+
+// Simple confetti animation
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+let confetti = [];
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function startConfetti() {
+  for (let i=0; i<150; i++) {
+    confetti.push({
+      x: random(0, canvas.width),
+      y: random(0, canvas.height),
+      r: random(3, 6),
+      d: random(2, 5),
+      color: `hsl(${Math.random()*360},100%,70%)`
+    });
+  }
+  animateConfetti();
+}
+
+function animateConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  confetti.forEach((p, idx) => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+  });
+  updateConfetti();
+  requestAnimationFrame(animateConfetti);
+}
+
+function updateConfetti() {
+  confetti.forEach(p => {
+    p.y += p.d;
+    if (p.y > canvas.height) {
+      p.y = 0;
+      p.x = random(0, canvas.width);
+    }
+  });
+}
+</script>
+</body>
+</html>
