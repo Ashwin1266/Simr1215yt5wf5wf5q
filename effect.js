@@ -165,21 +165,32 @@ $('document').ready(function(){
 	});
 	
 	$('#story').click(function () {
-  $(this).fadeOut('slow'); // Hide the story text or button
+  $($('#story').click(function () {
+  $(this).fadeOut('slow'); // hide story click text
 
-  // Step 1: Hide cake and balloons
+  // Hide cake and balloons
   $('.cake, .balloon').fadeOut('fast').promise().done(function () {
 
-    // Step 2: Show Simran's photo and message together
+    // Show Simran’s photo
     $('.simran-photo').fadeIn('slow');
-    $('.message').fadeIn('slow');
 
-    // Step 3: After 5 seconds, hide photo + message and bring back cake + balloons
+    // Wait a moment before showing message
     setTimeout(function () {
-      $('.simran-photo').fadeOut('slow');
-      $('.message').fadeOut('slow');
-      $('.cake, .balloon').fadeIn('slow');
-    }, 5000); // show for 5 seconds
+      $('.message').fadeIn('slow');
+
+      // 👉 Start Ayush Sharma’s typing animation here
+      if (typeof msgLoop === 'function') {
+        msgLoop(0);
+      }
+
+      // After message completes, hide photo + message and show cake & balloons again
+      setTimeout(function () {
+        $('.simran-photo').fadeOut('slow');
+        $('.message').fadeOut('slow');
+        $('.cake, .balloon').fadeIn('slow');
+      }, 15000); // adjust this timing based on your message length
+
+    }, 1000); // delay before showing message
   });
 });
 		
