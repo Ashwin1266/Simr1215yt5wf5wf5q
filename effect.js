@@ -167,7 +167,8 @@ $('document').ready(function(){
 	$('#story').click(function(){
 		$(this).fadeOut('slow');
 		$('.cake').fadeOut('fast').promise().done(function(){
-			$('.message').fadeIn('slow');
+    $('.simran-photo').fadeIn('slow');
+});
 		});
 		
 		var i;
