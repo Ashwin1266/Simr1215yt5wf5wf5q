@@ -166,9 +166,16 @@ $('document').ready(function(){
 	
 	$('#story').click(function(){
 		$(this).fadeOut('slow');
-		$('.message').fadeOut('slow').promise().done(function(){
-           $('.simran-photo').fadeIn('slow');
-       });
+		$('#story').click(function(){
+  $(this).fadeOut('slow');
+  $('.cake').fadeOut('fast').promise().done(function(){
+      $('.message').fadeIn('slow');
+  });
+});
+
+$('.message').fadeOut('slow').promise().done(function(){
+    $('.simran-photo').fadeIn('slow');
+});
 		
 		var i;
 
