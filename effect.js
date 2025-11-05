@@ -169,6 +169,10 @@ $('document').ready(function(){
 		$('.cake').fadeOut('fast').promise().done(function(){
 			$('.message').fadeIn('slow');
 		});
+
+		$('.message').fadeOut('slow').promise().done(function(){
+           $('.simran-photo').fadeIn('slow');
+       });
 		
 		var i;
 
