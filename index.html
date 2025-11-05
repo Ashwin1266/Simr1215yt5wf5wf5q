@@ -181,6 +181,67 @@
   <img src="simran.jpg" alt="Simran" style="width:250px; border-radius:20px; box-shadow:0 0 25px rgba(0,0,0,0.4);">
   <h2 style="color:#ff4081; font-family:'Pacifico', cursive; margin-top:10px;">Happy Birthday Simran 🎉</h2>
 	</div>
+ <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const messageBox = document.querySelector('.message');
+  const photo = document.querySelector('.simran-photo');
+  const cake = document.querySelector('.cake');
+  const balloons = document.querySelectorAll('.balloon');
+
+  // Blessing message (you can change this text)
+  const lines = [
+    "Happy Birthday Simran 🎉",
+    "Wishing you a day filled with love, laughter, and smiles.",
+    "May your year ahead be as bright and beautiful as you are.",
+    "From your brother, Ashwin ❤️"
+  ];
+
+  function typeMessage(index = 0) {
+    if (index >= lines.length) {
+      // After all lines done, hide message + photo and show cake/balloons again
+      setTimeout(() => {
+        messageBox.style.display = 'none';
+        photo.style.display = 'none';
+        balloons.forEach(b => b.style.display = 'block');
+        cake.style.display = 'block';
+      }, 2000);
+      return;
+    }
+
+    // Show one line at a time with typing animation
+    messageBox.textContent = "";
+    let i = 0;
+    const text = lines[index];
+    const typing = setInterval(() => {
+      messageBox.textContent += text[i];
+      i++;
+      if (i === text.length) {
+        clearInterval(typing);
+        setTimeout(() => typeMessage(index + 1), 1500);
+      }
+    }, 60);
+  }
+
+  // Trigger when the story button is clicked
+  document.getElementById('story').addEventListener('click', () => {
+    // Hide cake and balloons
+    balloons.forEach(b => b.style.display = 'none');
+    cake.style.display = 'none';
+
+    // Show photo
+    photo.style.display = 'block';
+    messageBox.style.display = 'block';
+
+    // Start typing animation
+    typeMessage();
+  });
+});
+ </script>
+	<div class="simran-photo" style="display:none;">
+  <img src="simran.jpg" alt="Simran" style="width:200px;border-radius:12px;">
+</div>
+
+<div class="message" style="display:none; font-size:20px; color:#fff; text-align:center; margin-top:20px;"></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
