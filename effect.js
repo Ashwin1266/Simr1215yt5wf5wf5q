@@ -176,6 +176,29 @@ $('document').ready(function(){
 $('.message').fadeOut('slow').promise().done(function(){
     $('.simran-photo').fadeIn('slow');
 });
+	// Select elements
+const balloons = document.querySelector('.balloons');
+const cake = document.querySelector('.cake');
+const message = document.getElementById('message');
+
+// Hide balloons & cake when message starts
+function showMessage() {
+  balloons.classList.add('hidden');
+  cake.classList.add('hidden');
+  
+  // Show message for 5 seconds
+  message.style.display = 'block';
+  
+  setTimeout(() => {
+    // Hide message and bring back balloons + cake
+    message.style.display = 'none';
+    balloons.classList.remove('hidden');
+    cake.classList.remove('hidden');
+  }, 5000); // 5000 ms = 5 seconds
+}
+
+// Call function when you want message to appear
+showMessage();
 		
 		var i;
 
